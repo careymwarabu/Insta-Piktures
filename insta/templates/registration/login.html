@@ -1,0 +1,31 @@
+{%extends "registration/base.html"%}
+{% load static %} 
+
+{% load bootstrap4 %}
+{% block content %}
+
+<div id="wrapper" id="content">
+      <div class="form-data" align-right>
+          <form action="/accounts/login/" method="post">
+              {% csrf_token %}
+              <div class="logo">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" alt="">
+              </div>
+              {% bootstrap_form form%}
+              <button class="form-btn" type="submit">Login</button>
+            
+              <a href="#" class="password-reset">Forgot password?</a>
+              <input type="hidden" name="next" value="{{next}}">
+          </form>
+          <div class="sign-up">
+              Don't have an account?  <a href="/accounts/register/" class="ml-2">Sign Up</a>
+          </div>
+      </div>
+  </div>
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3 ma" style="color: #808080; margin-bottom: 0% !important; ">© 2021
+    Copyright: Insta-Piktures from Facebook<br>
+  </div>
+  <!-- Copyright -->
+</footer>
+{% endblock %}

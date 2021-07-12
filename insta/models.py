@@ -1,6 +1,7 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+from django.db.models.base import Model
 
 # Create your models here.
 class Profile(models.Model):

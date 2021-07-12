@@ -5,38 +5,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from .forms import CreateProfileForm,UploadImageForm, EditBioForm, FollowForm, UnfollowForm,Comment
 from django.contrib.auth.decorators import login_required
-# from .forms import NewsLetterForm
 from .email import send_welcome_email
-# Create your views here.
 
-@login_required(login_url='/accounts/login/')
-def index(request):
-    
-    current_user =request.user
-    try:
-        logged_in = Profile.objects.get(user = current_user)
-    except Profile.DoesNotExist:
-        raise Http404()
-
-    timeline_images = []
-    current_images = Image.objects.filter(profile = logged_in)
-    for current_image in current_images:
-        timeline_images.append(current_image.id)
-
-    current_following = Follow.objects.filter(follower = logged_in)
-    for following in current_following:
-        following_profile = following.followed
-        following_images = Image.get_profile_images(following_profile)
-        for image in following_images:
-            from django.shortcuts import render,redirect
-from django.contrib.auth.models import User
-from .models import Image, Profile, Follow, Comment
-from django.http import HttpResponseRedirect, Http404
-from django.urls import reverse
-from .forms import CreateProfileForm,UploadImageForm, EditBioForm, FollowForm, UnfollowForm,Comment
-from django.contrib.auth.decorators import login_required
-# from .forms import NewsLetterForm
-from .email import send_welcome_email
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
@@ -73,11 +43,8 @@ def index(request):
     suggestions = Profile.objects.all()[:4]
     print("SUGGESTED")
     print(suggestions[0])
-    #return render(request, 'index.html', {"profile": profile, "display_images": display_images, "comments":comments})
+    
     return render(request, 'index.html', {"images":display_images,"current_user": current_user, "liked":liked, "comments":comments, "suggestions":suggestions, "logged_in":logged_in})
-
-    #return render(request,'index.html',{"image":image,"comments":comments,"profile":profile, "title":title, "suggestions":suggestions, "loggedIn":logged_in})
-    #return render(request, 'index.html', {"image":display_images,"liked":liked,"comment":comment, "title":title, "suggestions":suggestions, "loggedIn":logged_in})
 
 #comment function
 def comment(request, image_id):
