@@ -31,7 +31,7 @@ MODE=config("MODE", default="dev")
 SECRET_KEY = 'django-insecure-=x3ly_@!o(vvnbure%lmx)df+2n0l7mys7z35o-b9irrdez6kz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG')
 
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'insta.apps.InstaConfig',
     'bootstrap4',
-    'cloudinary'
+    'cloudinary',
     'crispy_forms',
 ]
 
